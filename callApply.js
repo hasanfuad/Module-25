@@ -1,37 +1,31 @@
-const person={
-    firstName: "Fuad",
-    lastName: "Hasan",
-    getName: function(){
-        return this.firstName, this.lastName;
-    },
-    salary: 25000,
-    chargedBill: function(amount){
-        this.salary = this.salary - amount;
+const student = {
+    firstName : "Fuad",
+    lastName : "Hasan",
+    salary : 20000,
+    totalCost : function(amount, tip, tax){
+        this.salary = this.salary - amount - tip - tax;
         return this.salary;
     }
 }
 
-const heroPeople = {
-    firstName: "Hero",
-    lastName: "Alam",
-    salary: 20000
+const anotherStudent = {
+    firstName: "Fahad",
+    salary: 25000
 }
 
-const villainPeople = {
-    firstName: "Villain",
-    lastName: "Alam",
-    salary: 20000
-}
+// Bind****
 
-const personCost = person.chargedBill(3000);
-console.log("person:",personCost);
+const anotherStudentCharge = student.totalCost.bind(anotherStudent);
+anotherStudentCharge(2000);
+console.log(anotherStudent.salary);
 
-const heroBill = person.chargedBill.bind(heroPeople);
-heroBill(2000);
 
-console.log("Hero salary "+ heroPeople.salary);
+// Call****
 
-const villainBill = person.chargedBill.bind(villainPeople);
-villainBill(5000)
-console.log("Villain salary: "+ villainPeople.salary);
+student.totalCost.call(anotherStudent, 4000);
+console.log(anotherStudent.salary);
 
+//Apply***
+
+student.totalCost.apply(anotherStudent, [5000, 500, 50]);
+console.log(anotherStudent.salary);
